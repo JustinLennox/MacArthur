@@ -34,6 +34,17 @@
 {
     [super viewDidLoad];
 
+    }
+
+-(void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+
+
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    NSLog(@"view will layout");
     // Configure the view.
     SKView * skView = (SKView *)self.view;
     skView.showsFPS = YES;
@@ -42,12 +53,16 @@
     skView.ignoresSiblingOrder = YES;
     
     // Create and configure the scene.
-    GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    GameScene *scene = [GameScene sceneWithSize:skView.bounds.size];
+    scene.myRootRef = self.myRootRef;
+    scene.roomRef = self.roomRef;
+    scene.startingPlayer = self.startingPlayer;
+    scene.scaleMode = SKSceneScaleModeAspectFit;
     
     // Present the scene.
     [skView presentScene:scene];
 }
+
 
 - (BOOL)shouldAutorotate
 {
@@ -56,12 +71,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self.roomRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot)
-     {
-         
-     }
-     ];
+    NSLog(@"view will appear");
 
 }
 

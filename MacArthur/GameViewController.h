@@ -14,5 +14,6 @@
 
 @property (strong, nonatomic) Firebase *myRootRef;
 @property (strong, nonatomic) Firebase *roomRef;
+@property (nonatomic) BOOL startingPlayer;
 
 @end

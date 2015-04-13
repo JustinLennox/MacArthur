@@ -222,6 +222,11 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         GameViewController *vc = segue.destinationViewController;
         vc.myRootRef = self.myRootRef;
         vc.roomRef = [self.myRootRef childByAppendingPath:self.roomCodeString];
+        if(self.newRoom){
+            vc.startingPlayer = YES;
+        }else{
+            vc.startingPlayer = NO;
+        }
         
     }
 }
