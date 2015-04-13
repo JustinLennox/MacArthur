@@ -56,7 +56,9 @@
     GameScene *scene = [GameScene sceneWithSize:skView.bounds.size];
     scene.myRootRef = self.myRootRef;
     scene.roomRef = self.roomRef;
+    scene.roomCodeString = self.roomCodeString;
     scene.startingPlayer = self.startingPlayer;
+    scene.deviceNumber = self.deviceNumber;
     scene.scaleMode = SKSceneScaleModeAspectFit;
     
     // Present the scene.

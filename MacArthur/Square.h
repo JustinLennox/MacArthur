@@ -12,5 +12,13 @@
 
 @property (nonatomic) int column;
 @property (nonatomic) int row;
+@property (nonatomic) int deviceNumber;
+@property (strong, nonatomic) NSString *type;
+@property (strong, nonatomic) NSString *coordinateString;
+@property (nonatomic) int portalNumber;
+@property (nonatomic) int portalRow1;
+@property (nonatomic) int portalRow2;
+@property (nonatomic) int portalColumn1;
+@property (nonatomic) int portalColumn2;
 
 @end

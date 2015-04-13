@@ -43,8 +43,11 @@
     
     self.roomCodeTextField = [[UITextField alloc] initWithFrame:self.startRoomButton.frame];
     self.roomCodeTextField.placeholder = @"Room Code";
+    self.roomCodeTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.roomCodeTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.roomCodeLabel = [[UILabel alloc] initWithFrame:self.roomCodeTextField.frame];
     self.usernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(self.roomCodeTextField.frame.origin.x, CGRectGetMaxY(self.roomCodeTextField.frame) + 20, self.roomCodeTextField.frame.size.width, self.roomCodeTextField.frame.size.height)];
+    self.usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.usernameTextField.placeholder = @"Username";
 
     
@@ -113,6 +116,8 @@
         Firebase *currentRoomRef = [self.myRootRef childByAppendingPath:self.roomCodeString];
         [currentRoomRef updateChildValues:@{@"gameStart":@"NO"}];
         [currentRoomRef updateChildValues:@{@"turnNumber":@0}];
+        [currentRoomRef updateChildValues:@{@"portalNumber":@0}];
+        [currentRoomRef updateChildValues:@{@"coordinateDictionary":@{@"start":@"nil"}}];
         
         //Add Values to the Player
 //        [currentRoomRef updateChildValues:
@@ -222,6 +227,8 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
         GameViewController *vc = segue.destinationViewController;
         vc.myRootRef = self.myRootRef;
         vc.roomRef = [self.myRootRef childByAppendingPath:self.roomCodeString];
+        vc.deviceNumber = (int) self.usersInRoom;
+        vc.roomCodeString = self.roomCodeString;
         if(self.newRoom){
             vc.startingPlayer = YES;
         }else{

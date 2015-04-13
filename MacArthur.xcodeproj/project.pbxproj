@@ -29,6 +29,9 @@
 		D03CDAA61ADBBA3900F25929 /* Square.m in Sources */ = {isa = PBXBuildFile; fileRef = D03CDAA51ADBBA3900F25929 /* Square.m */; };
 		D03CDAA81ADBBE9C00F25929 /* frameMarker_000.png in Resources */ = {isa = PBXBuildFile; fileRef = D03CDAA71ADBBE9C00F25929 /* frameMarker_000.png */; };
 		D03CDAAA1ADBC0BE00F25929 /* Square.png in Resources */ = {isa = PBXBuildFile; fileRef = D03CDAA91ADBC0BE00F25929 /* Square.png */; };
+		D03CDAAC1ADBDD5F00F25929 /* totem2.png in Resources */ = {isa = PBXBuildFile; fileRef = D03CDAAB1ADBDD5F00F25929 /* totem2.png */; };
+		D03CDAB21ADC2FFC00F25929 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = D03CDAB11ADC2FFC00F25929 /* Player.m */; };
+		D03CDAB41ADC407D00F25929 /* aragon2.png in Resources */ = {isa = PBXBuildFile; fileRef = D03CDAB31ADC407D00F25929 /* aragon2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,10 @@
 		D03CDAA51ADBBA3900F25929 /* Square.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Square.m; sourceTree = "<group>"; };
 		D03CDAA71ADBBE9C00F25929 /* frameMarker_000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frameMarker_000.png; sourceTree = "<group>"; };
 		D03CDAA91ADBC0BE00F25929 /* Square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Square.png; sourceTree = "<group>"; };
+		D03CDAAB1ADBDD5F00F25929 /* totem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = totem2.png; sourceTree = "<group>"; };
+		D03CDAB01ADC2FFC00F25929 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		D03CDAB11ADC2FFC00F25929 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		D03CDAB31ADC407D00F25929 /* aragon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aragon2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +147,10 @@
 				D03CDA711ADBAC1A00F25929 /* GameViewController.m */,
 				D03CDAA41ADBBA3900F25929 /* Square.h */,
 				D03CDAA51ADBBA3900F25929 /* Square.m */,
+				D03CDAB01ADC2FFC00F25929 /* Player.h */,
+				D03CDAB11ADC2FFC00F25929 /* Player.m */,
+				D03CDAAB1ADBDD5F00F25929 /* totem2.png */,
+				D03CDAB31ADC407D00F25929 /* aragon2.png */,
 				D03CDA731ADBAC1A00F25929 /* Main.storyboard */,
 				D03CDAA11ADBAD4500F25929 /* SetupViewController.h */,
 				D03CDAA21ADBAD4500F25929 /* SetupViewController.m */,
@@ -259,8 +270,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03CDAB41ADC407D00F25929 /* aragon2.png in Resources */,
 				D03CDA7A1ADBAC1A00F25929 /* LaunchScreen.xib in Resources */,
 				D03CDAA81ADBBE9C00F25929 /* frameMarker_000.png in Resources */,
+				D03CDAAC1ADBDD5F00F25929 /* totem2.png in Resources */,
 				D03CDA771ADBAC1A00F25929 /* Images.xcassets in Resources */,
 				D03CDA6F1ADBAC1A00F25929 /* GameScene.sks in Resources */,
 				D03CDAAA1ADBC0BE00F25929 /* Square.png in Resources */,
@@ -282,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03CDAB21ADC2FFC00F25929 /* Player.m in Sources */,
 				D03CDAA61ADBBA3900F25929 /* Square.m in Sources */,
 				D03CDA721ADBAC1A00F25929 /* GameViewController.m in Sources */,
 				D03CDA6A1ADBAC1A00F25929 /* AppDelegate.m in Sources */,
