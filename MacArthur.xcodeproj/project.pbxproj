@@ -16,6 +16,16 @@
 		D03CDA771ADBAC1A00F25929 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03CDA761ADBAC1A00F25929 /* Images.xcassets */; };
 		D03CDA7A1ADBAC1A00F25929 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03CDA781ADBAC1A00F25929 /* LaunchScreen.xib */; };
 		D03CDA861ADBAC1A00F25929 /* MacArthurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D03CDA851ADBAC1A00F25929 /* MacArthurTests.m */; };
+		D03CDA901ADBAC6D00F25929 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D03CDA8F1ADBAC6D00F25929 /* CoreGraphics.framework */; };
+		D03CDA921ADBAC7200F25929 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D03CDA911ADBAC7200F25929 /* Foundation.framework */; };
+		D03CDA941ADBAC7600F25929 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D03CDA931ADBAC7600F25929 /* UIKit.framework */; };
+		D03CDA961ADBAC7B00F25929 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D03CDA951ADBAC7B00F25929 /* SystemConfiguration.framework */; };
+		D03CDA981ADBAC8000F25929 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D03CDA971ADBAC8000F25929 /* Security.framework */; };
+		D03CDA9A1ADBAC8400F25929 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D03CDA991ADBAC8400F25929 /* CFNetwork.framework */; };
+		D03CDA9C1ADBAC8B00F25929 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D03CDA9B1ADBAC8B00F25929 /* libc++.dylib */; };
+		D03CDA9E1ADBAC9300F25929 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D03CDA9D1ADBAC9300F25929 /* libicucore.dylib */; };
+		D03CDAA01ADBACA100F25929 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D03CDA9F1ADBACA100F25929 /* Firebase.framework */; };
+		D03CDAA31ADBAD4500F25929 /* SetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03CDAA21ADBAD4500F25929 /* SetupViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +55,17 @@
 		D03CDA7F1ADBAC1A00F25929 /* MacArthurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacArthurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03CDA841ADBAC1A00F25929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D03CDA851ADBAC1A00F25929 /* MacArthurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacArthurTests.m; sourceTree = "<group>"; };
+		D03CDA8F1ADBAC6D00F25929 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D03CDA911ADBAC7200F25929 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D03CDA931ADBAC7600F25929 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D03CDA951ADBAC7B00F25929 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D03CDA971ADBAC8000F25929 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D03CDA991ADBAC8400F25929 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D03CDA9B1ADBAC8B00F25929 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		D03CDA9D1ADBAC9300F25929 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		D03CDA9F1ADBACA100F25929 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
+		D03CDAA11ADBAD4500F25929 /* SetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupViewController.h; sourceTree = "<group>"; };
+		D03CDAA21ADBAD4500F25929 /* SetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +73,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03CDA9E1ADBAC9300F25929 /* libicucore.dylib in Frameworks */,
+				D03CDAA01ADBACA100F25929 /* Firebase.framework in Frameworks */,
+				D03CDA9C1ADBAC8B00F25929 /* libc++.dylib in Frameworks */,
+				D03CDA9A1ADBAC8400F25929 /* CFNetwork.framework in Frameworks */,
+				D03CDA981ADBAC8000F25929 /* Security.framework in Frameworks */,
+				D03CDA961ADBAC7B00F25929 /* SystemConfiguration.framework in Frameworks */,
+				D03CDA941ADBAC7600F25929 /* UIKit.framework in Frameworks */,
+				D03CDA921ADBAC7200F25929 /* Foundation.framework in Frameworks */,
+				D03CDA901ADBAC6D00F25929 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +98,14 @@
 		D03CDA581ADBAC1A00F25929 = {
 			isa = PBXGroup;
 			children = (
+				D03CDA9D1ADBAC9300F25929 /* libicucore.dylib */,
+				D03CDA9B1ADBAC8B00F25929 /* libc++.dylib */,
+				D03CDA991ADBAC8400F25929 /* CFNetwork.framework */,
+				D03CDA971ADBAC8000F25929 /* Security.framework */,
+				D03CDA951ADBAC7B00F25929 /* SystemConfiguration.framework */,
+				D03CDA931ADBAC7600F25929 /* UIKit.framework */,
+				D03CDA911ADBAC7200F25929 /* Foundation.framework */,
+				D03CDA8F1ADBAC6D00F25929 /* CoreGraphics.framework */,
 				D03CDA631ADBAC1A00F25929 /* MacArthur */,
 				D03CDA821ADBAC1A00F25929 /* MacArthurTests */,
 				D03CDA621ADBAC1A00F25929 /* Products */,
@@ -94,6 +132,8 @@
 				D03CDA701ADBAC1A00F25929 /* GameViewController.h */,
 				D03CDA711ADBAC1A00F25929 /* GameViewController.m */,
 				D03CDA731ADBAC1A00F25929 /* Main.storyboard */,
+				D03CDAA11ADBAD4500F25929 /* SetupViewController.h */,
+				D03CDAA21ADBAD4500F25929 /* SetupViewController.m */,
 				D03CDA761ADBAC1A00F25929 /* Images.xcassets */,
 				D03CDA781ADBAC1A00F25929 /* LaunchScreen.xib */,
 				D03CDA641ADBAC1A00F25929 /* Supporting Files */,
@@ -104,6 +144,7 @@
 		D03CDA641ADBAC1A00F25929 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D03CDA9F1ADBACA100F25929 /* Firebase.framework */,
 				D03CDA651ADBAC1A00F25929 /* Info.plist */,
 				D03CDA661ADBAC1A00F25929 /* main.m */,
 			);
@@ -231,6 +272,7 @@
 				D03CDA721ADBAC1A00F25929 /* GameViewController.m in Sources */,
 				D03CDA6A1ADBAC1A00F25929 /* AppDelegate.m in Sources */,
 				D03CDA6D1ADBAC1A00F25929 /* GameScene.m in Sources */,
+				D03CDAA31ADBAD4500F25929 /* SetupViewController.m in Sources */,
 				D03CDA671ADBAC1A00F25929 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,8 +397,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MacArthur",
+				);
 				INFOPLIST_FILE = MacArthur/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -365,8 +412,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MacArthur",
+				);
 				INFOPLIST_FILE = MacArthur/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

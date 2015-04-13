@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
+#import <Firebase/Firebase.h>
 
 @interface GameViewController : UIViewController
+
+@property (strong, nonatomic) Firebase *myRootRef;
+@property (strong, nonatomic) Firebase *roomRef;
 
 @end

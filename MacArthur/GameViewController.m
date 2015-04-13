@@ -54,6 +54,17 @@
     return YES;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self.roomRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot)
+     {
+         
+     }
+     ];
+
+}
+
 - (NSUInteger)supportedInterfaceOrientations
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
