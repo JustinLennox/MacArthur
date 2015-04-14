@@ -24,6 +24,7 @@
 @property (nonatomic) BOOL deviceTurn;
 @property (nonatomic) int deviceNumber;
 @property (nonatomic) int turnNumber;
+@property (nonatomic) int turnTimerCounter;
 @property (strong, nonatomic) NSString *roomCodeString;
 @property (strong, nonatomic) NSMutableArray *gridArray;
 @property (strong, nonatomic) NSMutableArray *usernameArray;

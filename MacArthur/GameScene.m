@@ -143,12 +143,6 @@
     
     [self.turnRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot)
      {
-//         for(Player *player in self.playerArray){
-//             NSLog(@"Player Number:%d Turn Number:%d", player.playerNumber, [snapshot.value intValue]);
-//             if(player.playerNumber == [snapshot.value intValue]){
-//                 NSLog(@"Turn start go!!!");
-//             }
-//         }
          self.turnNumber = [snapshot.value intValue];
          int userNumber = 0;
          for(NSString *username in self.usernameArray)
@@ -161,7 +155,7 @@
                  {
                      if([snapshot.value intValue] == userNumber)
                      {
-                         [self startTurn];
+                         [self prepTurn];
                      }
                  }
              }
@@ -175,13 +169,46 @@
     
     
     [self.view bringSubviewToFront:self.roomCodeLabel];
+    SKLabelNode *prepTurnLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+    prepTurnLabel.position = CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
+    prepTurnLabel.name = @"prepTurnLabel";
+    prepTurnLabel.alpha = 0.0f;
+    [self addChild:prepTurnLabel];
+    
+    SKLabelNode *goLabel = [SKLabelNode labelNodeWithText:@"GO!"];
+    goLabel.position =CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
+    goLabel.name = @"goLabel";
+    goLabel.alpha = 0.0f;
+    [self addChild:goLabel];
+    
+}
 
+-(void)prepTurn{
+    NSTimer *prepTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(startTurn) userInfo:nil repeats:NO];
+    SKLabelNode *prepTurnLabel = (SKLabelNode *)[self childNodeWithName:@"prepTurnLabel"];
+    [prepTurnLabel setText:[NSString stringWithFormat:@"%@ GET READY!", [self.usernameArray objectAtIndex:self.turnNumber]]];
+    prepTurnLabel.alpha = 1.0f;
     
 }
 
 -(void)startTurn{
     NSLog(@"Start Turn");
+    SKLabelNode *prepTurnLabel = (SKLabelNode *)[self childNodeWithName:@"prepTurnLabel"];
+    prepTurnLabel.alpha = 0.0f;
+    
+    SKLabelNode *goLabel = (SKLabelNode *)[self childNodeWithName:@"goLabel"];
+    goLabel.alpha = 1.0f;
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0.0f duration:0.5f];
+    [goLabel runAction:fadeOut];
+    
     self.turnTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f target:self selector:@selector(endTurn) userInfo:nil repeats:NO];
+    self.turnTimerCounter = 15;
+    NSTimer *turnCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(secondTick) userInfo:nil repeats:YES];
+}
+
+-(void)secondTick{
+    self.turnTimerCounter--;
+
     
 }
 
