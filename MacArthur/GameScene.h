@@ -9,6 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import <Firebase/Firebase.h>
 #import "Square.h"
+#import "Player.h"
 
 @interface GameScene : SKScene
 
@@ -34,5 +35,5 @@
 @property (strong, nonatomic) NSMutableDictionary *coordinateDictionary;
 @property (strong, nonatomic) UILabel *roomCodeLabel;
 @property (strong, nonatomic) NSTimer *turnTimer;
-
+@property (strong, nonatomic) Player *currentPlayer;
 @end

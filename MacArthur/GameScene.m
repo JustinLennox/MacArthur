@@ -125,13 +125,16 @@
                           player.deviceNumber = self.deviceNumber;
                           player.playerNumber = userNumber;
                           player.username = username;
-                          [self addChild:player];
+                          player.name = username;
                           SKLabelNode *usernameLabel = [[SKLabelNode alloc] initWithFontNamed:@"Helvetica"];
                           usernameLabel.text = [NSString stringWithFormat:@"%@", username];
-                          [player addChild:usernameLabel];
                           usernameLabel.position = CGPointMake(0, 10);
-                          [self.playerArray addObject:player];
+                          if(![self childNodeWithName:username]){
+                              [self addChild:player];
+                              [self.playerArray addObject:player];
+                              [player addChild:usernameLabel];
 
+                          }
                       }
                 }
                  userNumber++;
@@ -181,18 +184,35 @@
     goLabel.alpha = 0.0f;
     [self addChild:goLabel];
     
+    SKLabelNode *timeLabel = [SKLabelNode labelNodeWithText:@"TIME!"];
+    timeLabel.position =CGPointMake(CGRectGetMidX(self.view.frame), CGRectGetMidY(self.view.frame));
+    timeLabel.name = @"timeLabel";
+    timeLabel.alpha = 0.0f;
+    [self addChild:timeLabel];
 }
 
 -(void)prepTurn{
     NSTimer *prepTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(startTurn) userInfo:nil repeats:NO];
+    
+    SKLabelNode *timeLabel = (SKLabelNode *)[self childNodeWithName:@"timeLabel"];
+    timeLabel.alpha = 0.0f;
+    
     SKLabelNode *prepTurnLabel = (SKLabelNode *)[self childNodeWithName:@"prepTurnLabel"];
     [prepTurnLabel setText:[NSString stringWithFormat:@"%@ GET READY!", [self.usernameArray objectAtIndex:self.turnNumber]]];
     prepTurnLabel.alpha = 1.0f;
+    
+    self.currentPlayer = (Player *)[self childNodeWithName:[self.usernameArray objectAtIndex:self.turnNumber]];
+    self.currentPlayer.color = [SKColor yellowColor];
+    self.currentPlayer.blendMode = 0.7f;
     
 }
 
 -(void)startTurn{
     NSLog(@"Start Turn");
+    self.canInteract = YES;
+    
+    NSTimer *turnCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(secondTick) userInfo:nil repeats:YES];
+    
     SKLabelNode *prepTurnLabel = (SKLabelNode *)[self childNodeWithName:@"prepTurnLabel"];
     prepTurnLabel.alpha = 0.0f;
     
@@ -203,7 +223,6 @@
     
     self.turnTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f target:self selector:@selector(endTurn) userInfo:nil repeats:NO];
     self.turnTimerCounter = 15;
-    NSTimer *turnCounter = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(secondTick) userInfo:nil repeats:YES];
 }
 
 -(void)secondTick{
@@ -214,6 +233,8 @@
 
 -(void)endTurn{
     NSLog(@"End Turn");
+    
+    self.canInteract = NO;
     [self.turnTimer invalidate];
     self.turnTimer = nil;
     if(self.turnNumber < self.usernameArray.count -1){
@@ -221,7 +242,11 @@
     }else{
         self.turnNumber = 0;
     }
+    
     [self.turnRef setValue:[NSNumber numberWithInt:self.turnNumber]];
+    
+    self.currentPlayer.color = [SKColor whiteColor];
+    self.currentPlayer.blendMode = 0.0f;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -230,9 +255,13 @@
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
+        NSLog(@"Node name:%@", n.name);
         if([[[n class] description] isEqualToString:@"Square"])
         {
             Square *square = (Square *)n;
+            if(self.canInteract){
+                self.currentPlayer.position = square.position;
+            }
             if(!self.gameStarted && !self.connecting)
             {
                 [self placePortalStart:square];
