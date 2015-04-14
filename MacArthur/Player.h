@@ -13,5 +13,7 @@
 @property (nonatomic) int column;
 @property (nonatomic) int row;
 @property (nonatomic) int deviceNumber;
+@property (nonatomic) int playerNumber;
+@property (strong, nonatomic) NSString *username;
 
 @end

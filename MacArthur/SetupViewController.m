@@ -115,9 +115,9 @@
         [self.myRootRef updateChildValues:roomDictionary];
         Firebase *currentRoomRef = [self.myRootRef childByAppendingPath:self.roomCodeString];
         [currentRoomRef updateChildValues:@{@"gameStart":@"NO"}];
-        [currentRoomRef updateChildValues:@{@"turnNumber":@0}];
+        [currentRoomRef updateChildValues:@{@"turnNumber":@1000}];
         [currentRoomRef updateChildValues:@{@"portalNumber":@0}];
-        [currentRoomRef updateChildValues:@{@"coordinateDictionary":@{@"start":@"nil"}}];
+        [currentRoomRef updateChildValues:@{@"coordinateDictionary":@{@"011":@"empty"}}];
         
         //Add Values to the Player
 //        [currentRoomRef updateChildValues:

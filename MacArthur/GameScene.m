@@ -19,12 +19,13 @@
 
 -(void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
-    NSLog(@"Did move to view");
     self.coordinateRef = [self.roomRef childByAppendingPath:@"coordinateDictionary"];
     self.usersWithPropertiesRef = [self.roomRef childByAppendingPath:@"usersWithProperties"];
+    self.turnRef = [self.roomRef childByAppendingPath:@"turnNumber"];
     
     self.gridArray = [[NSMutableArray alloc] init];
     self.usernameArray = [[NSMutableArray alloc] init];
+    self.playerArray = [[NSMutableArray alloc] init];
     self.portalDictionary = [[NSMutableDictionary alloc] init];
     
     if(self.startingPlayer){
@@ -45,8 +46,7 @@
     numberRows = self.view.frame.size.height/100;
     float columnBuffer = (self.view.frame.size.width - 100.0f*numberColumns)/2.0000f;
     float rowBuffer = (self.view.frame.size.height - 100.0f*numberRows)/2.0000f;
-    NSLog(@"columns:%d, Rows:%d", numberColumns, numberRows);
-    NSLog(@"column buffer:%f", columnBuffer);
+
     float previousX = 50 + columnBuffer;
     float previousY = 50 + rowBuffer;
     int y = 1;
@@ -61,7 +61,6 @@
             square.deviceNumber = self.deviceNumber;
             square.position = CGPointMake(previousX, previousY);
             previousX += 100;
-            NSLog(@"Square Position x:%f y:%f", square.position.x, square.position.y);
             NSString *coordinateString = [NSString stringWithFormat:@"%d%d%d", self.deviceNumber, x, y];
             square.coordinateString = coordinateString;
             [self.coordinateRef updateChildValues:@{coordinateString:@"empty"}];
@@ -73,7 +72,6 @@
         previousY += 100;
         previousX = 50 + columnBuffer;
         y++;
-        NSLog(@"Previous Y:%f, Height:%f", previousY, self.view.frame.size.height);
     }
     self.gameStarted = NO;
     
@@ -83,6 +81,7 @@
          self.usernameArray = snapshot.value[@"usernames"];
          self.usersWithPropertiesDictionary = snapshot.value[@"usersWithProperties"];
          self.coordinateDictionary = snapshot.value[@"coordinateDictionary"];
+
          
          if([snapshot.value[@"gameStart"] isEqualToString:@"NO"]){
              self.gameStarted = NO;
@@ -93,9 +92,7 @@
                  portalRow1 = [[snapshot.value[portalKey] objectForKey:[NSString stringWithFormat:@"%@Row1",portalKey]] intValue];
                  portalColumn1 = [[snapshot.value[portalKey] objectForKey:[NSString stringWithFormat:@"%@Column1",portalKey]] intValue];
 
-                 NSLog(@"YES");
              }else{
-                 NSLog(@"NO");
                  self.connecting = NO;
              }
 
@@ -111,37 +108,93 @@
 
          if(self.gameStarted)
          {
+             int userNumber = 0;
              for(NSString *username in self.usernameArray)
              {
                  NSDictionary *userWithProperty = snapshot.value[username];
                  NSString *coordinateString = [userWithProperty objectForKey:@"coordinates"];
-                 NSLog(@"user:%@",userWithProperty);
                  for(Square *square in self.gridArray)
                  {
-                      if([square.coordinateString isEqualToString:coordinateString]){
-                          NSLog(@"hell yes:%@",coordinateString);
+                      if([square.coordinateString isEqualToString:coordinateString])
+                      {
                           Player *player = [[Player alloc] initWithImageNamed:@"aragon2.png"];
-                          player.size = CGSizeMake(40, 40);
+                          player.size = CGSizeMake(50, 50);
                           player.position = CGPointMake(square.position.x, square.position.y);
-                          NSLog(@"player's position x:%f y:%f", player.position.y, player.position.x);
+                          player.row = square.row;
+                          player.column = square.column;
+                          player.deviceNumber = self.deviceNumber;
+                          player.playerNumber = userNumber;
+                          player.username = username;
                           [self addChild:player];
                           SKLabelNode *usernameLabel = [[SKLabelNode alloc] initWithFontNamed:@"Helvetica"];
                           usernameLabel.text = [NSString stringWithFormat:@"%@", username];
                           [player addChild:usernameLabel];
                           usernameLabel.position = CGPointMake(0, 10);
+                          [self.playerArray addObject:player];
+
                       }
-                  }
+                }
+                 userNumber++;
              }
          }
          
          
      }];
     
+    [self.turnRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot)
+     {
+//         for(Player *player in self.playerArray){
+//             NSLog(@"Player Number:%d Turn Number:%d", player.playerNumber, [snapshot.value intValue]);
+//             if(player.playerNumber == [snapshot.value intValue]){
+//                 NSLog(@"Turn start go!!!");
+//             }
+//         }
+         self.turnNumber = [snapshot.value intValue];
+         int userNumber = 0;
+         for(NSString *username in self.usernameArray)
+         {
+             NSDictionary *userWithProperty = [self.usersWithPropertiesDictionary objectForKey:username];
+             NSString *coordinateString = [userWithProperty objectForKey:@"coordinates"];
+             for(Square *square in self.gridArray)
+             {
+                 if([square.coordinateString isEqualToString:coordinateString])
+                 {
+                     if([snapshot.value intValue] == userNumber)
+                     {
+                         [self startTurn];
+                     }
+                 }
+             }
+             userNumber++;
+         }
+
+         
+         
+     }];
     
-    NSLog(@"Finished moving");
+    
+    
     [self.view bringSubviewToFront:self.roomCodeLabel];
 
     
+}
+
+-(void)startTurn{
+    NSLog(@"Start Turn");
+    self.turnTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f target:self selector:@selector(endTurn) userInfo:nil repeats:NO];
+    
+}
+
+-(void)endTurn{
+    NSLog(@"End Turn");
+    [self.turnTimer invalidate];
+    self.turnTimer = nil;
+    if(self.turnNumber < self.usernameArray.count -1){
+        self.turnNumber++;
+    }else{
+        self.turnNumber = 0;
+    }
+    [self.turnRef setValue:[NSNumber numberWithInt:self.turnNumber]];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -150,7 +203,6 @@
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         SKNode *n = [self nodeAtPoint:[touch locationInNode:self]];
-        NSLog(@"N class:%@",[[n class] description]);
         if([[[n class] description] isEqualToString:@"Square"])
         {
             Square *square = (Square *)n;
@@ -159,7 +211,6 @@
                 [self placePortalStart:square];
             }else if(!self.gameStarted && self.connecting)
             {
-                NSLog(@"Row:%d, Col:%d, deviceNumber:%d", square.row, square.column, self.deviceNumber);
                 [self placePortalEnd:square];
             }
         }
@@ -256,10 +307,10 @@
 }
 
 -(void)startGame : (UIButton *)sender{
-    NSLog(@"Start Game");
-    [self.roomRef updateChildValues:@{@"gameStart":@"YES"}];
     sender.alpha = 0.0f;
     self.roomCodeLabel.alpha = 0.0f;
+    [self.roomRef updateChildValues:@{@"gameStart":@"YES"}];
+
     NSMutableArray *coordinateArray = [[NSMutableArray alloc] init];
     for(id key in self.coordinateDictionary){
         [coordinateArray addObject:key];
@@ -269,6 +320,10 @@
         Firebase *userRef = [self.usersWithPropertiesRef childByAppendingPath:key];
         [userRef updateChildValues:@{@"coordinates":coordinateString}];
     }
+    [self.roomRef updateChildValues:@{@"turnNumber":@0}];
+
+    
+
     
 }
 
