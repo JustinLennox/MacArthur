@@ -15,6 +15,7 @@
 @property (strong, nonatomic) UITextField *roomCodeTextField;
 
 @property (strong, nonatomic) UILabel *roomCodeLabel;
+@property (strong, nonatomic) UILabel *usersAddedLabel;
 
 @property (strong, nonatomic) NSString *roomCodeString;
 @property (strong, nonatomic) NSString *username;
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) Firebase *roomRef;
 
 @property (nonatomic) NSInteger usersInRoom;
+@property (nonatomic) int usersAdded;
 
 @property (nonatomic) BOOL newRoom;
 @property (nonatomic) BOOL joinRoom;
@@ -32,6 +34,7 @@
 @property (strong, nonatomic) UIButton *startRoomButton;
 @property (strong, nonatomic) UIButton *startGameButton;
 @property (strong, nonatomic) UIButton *backButton;
+@property (strong, nonatomic) UIButton *addUsersButton;
 
 - (void)startRoomButtonPressed:(id)sender;
 - (void)joinRoomButtonPressed:(id)sender;

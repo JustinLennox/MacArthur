@@ -221,7 +221,7 @@
     SKAction *fadeOut = [SKAction fadeAlphaTo:0.0f duration:0.5f];
     [goLabel runAction:fadeOut];
     
-    self.turnTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f target:self selector:@selector(endTurn) userInfo:nil repeats:NO];
+    self.turnTimer = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(endTurn) userInfo:nil repeats:NO];
     self.turnTimerCounter = 15;
 }
 
@@ -247,6 +247,12 @@
     
     self.currentPlayer.color = [SKColor whiteColor];
     self.currentPlayer.blendMode = 0.0f;
+    
+    SKLabelNode *timeLabel = (SKLabelNode *)[self childNodeWithName:@"timeLabel"];
+    timeLabel.alpha = 1.0f;
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0.0f duration:0.5f];
+    [timeLabel runAction:fadeOut];
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -261,6 +267,8 @@
             Square *square = (Square *)n;
             if(self.canInteract){
                 self.currentPlayer.position = square.position;
+                self.currentPlayer.row = square.row;
+                self.currentPlayer.column = square.column;
             }
             if(!self.gameStarted && !self.connecting)
             {
@@ -385,6 +393,20 @@
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+    
+    [self enumerateChildNodesWithName:@"portal*" usingBlock:^(SKNode *node, BOOL *stop) {
+        if(CGRectIntersectsRect(<#CGRect rect1#>, <#CGRect rect2#>)){
+            NSLog(@"INTERSECT");
+            Square *portal = (Square *)node;
+            Firebase *userRef = [self.usersWithPropertiesRef childByAppendingPath:self.currentPlayer.username];
+            if(self.currentPlayer.row == portal.portalRow1 && self.currentPlayer.column == portal.portalColumn1){
+                [userRef updateChildValues:@{@"coordinates":[NSString stringWithFormat:@"%d%d%d",portal.deviceNumber, portal.portalColumn2, portal.portalRow2]}];
+            }else{
+                [userRef updateChildValues:@{@"coordinates":[NSString stringWithFormat:@"%d%d%d",portal.deviceNumber, portal.portalColumn1, portal.portalRow1]}];
+            }
+        }
+    }];
+    
 }
 
 @end

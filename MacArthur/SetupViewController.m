@@ -41,6 +41,19 @@
     [self.startGameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.startGameButton addTarget:self action:@selector(startGameButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
+    self.addUsersButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.addUsersButton setTitle:@"Add User" forState:UIControlStateNormal];
+    [self.addUsersButton setFrame:CGRectMake(10, CGRectGetMaxY(self.startGameButton.frame) + 20, 100, 50)];
+    [self.addUsersButton setBackgroundColor:[UIColor blueColor]];
+    [self.addUsersButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.addUsersButton addTarget:self action:@selector(addUsersPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.usersAddedLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.addUsersButton.frame) + 10, CGRectGetMaxY(self.startGameButton.frame) + 20, 100, 50)];
+    [self.usersAddedLabel setText:@""];
+    [self.usersAddedLabel setBackgroundColor:[UIColor blueColor]];
+    [self.usersAddedLabel setTextColor:[UIColor whiteColor]];
+    self.usersAdded = 0;
+    
     self.roomCodeTextField = [[UITextField alloc] initWithFrame:self.startRoomButton.frame];
     self.roomCodeTextField.placeholder = @"Room Code";
     self.roomCodeTextField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -49,11 +62,12 @@
     self.usernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(self.roomCodeTextField.frame.origin.x, CGRectGetMaxY(self.roomCodeTextField.frame) + 20, self.roomCodeTextField.frame.size.width, self.roomCodeTextField.frame.size.height)];
     self.usernameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.usernameTextField.placeholder = @"Username";
-
     
     [self.view addSubview:self.startRoomButton];
     [self.view addSubview:self.joinRoomButton];
     [self.view addSubview:self.startGameButton];
+    [self.view addSubview:self.addUsersButton];
+    [self.view addSubview:self.usersAddedLabel];
     [self.view addSubview:self.roomCodeTextField];
     [self.view addSubview:self.usernameTextField];
     [self.view addSubview:self.roomCodeLabel];
@@ -66,6 +80,8 @@
     self.roomCodeTextField.alpha = 0.0f;
     self.usernameTextField.alpha = 0.0f;
     self.roomCodeLabel.alpha = 0.0f;
+    self.addUsersButton.alpha = 0.0f;
+    self.usersAddedLabel.alpha = 0.0f;
 
 }
 
@@ -83,6 +99,8 @@
     self.startRoomButton.alpha = 0.0f;
     self.joinRoomButton.alpha = 0.0f;
     self.usernameTextField.alpha = 1.0f;
+    self.addUsersButton.alpha = 1.0f;
+    self.usersAddedLabel.alpha = 1.0f;
     self.newRoom = YES;
     self.joinRoom = NO;
     
@@ -170,6 +188,12 @@
         }];
 
     }
+}
+
+-(void)addUsersPressed{
+    self.usersAdded++;
+    [self.usersAddedLabel setText:[NSString stringWithFormat:@"%d",self.usersAdded]];
+    
 }
 
 NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
