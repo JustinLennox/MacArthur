@@ -11,7 +11,7 @@
 #import "Square.h"
 #import "Player.h"
 
-@interface GameScene : SKScene
+@interface GameScene : SKScene <SKPhysicsContactDelegate>
 
 @property (strong, nonatomic) Firebase *myRootRef;
 @property (strong, nonatomic) Firebase *roomRef;
@@ -23,6 +23,7 @@
 @property (nonatomic) BOOL connecting;
 @property (nonatomic) BOOL canInteract;
 @property (nonatomic) BOOL deviceTurn;
+@property (nonatomic) BOOL usersAdded;
 @property (nonatomic) int deviceNumber;
 @property (nonatomic) int turnNumber;
 @property (nonatomic) int turnTimerCounter;
@@ -30,8 +31,9 @@
 @property (strong, nonatomic) NSMutableArray *gridArray;
 @property (strong, nonatomic) NSMutableArray *usernameArray;
 @property (strong, nonatomic) NSMutableArray *playerArray;
+@property (strong, nonatomic) NSMutableDictionary *playerDictionary;
 @property (strong, nonatomic) NSMutableDictionary *usersWithPropertiesDictionary;
-@property (strong, nonatomic) NSMutableDictionary *portalDictionary;
+@property (strong, nonatomic) NSDictionary *portalDictionary;
 @property (strong, nonatomic) NSMutableDictionary *coordinateDictionary;
 @property (strong, nonatomic) UILabel *roomCodeLabel;
 @property (strong, nonatomic) NSTimer *turnTimer;

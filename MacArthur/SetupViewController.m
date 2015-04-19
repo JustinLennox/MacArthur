@@ -135,6 +135,7 @@
         [currentRoomRef updateChildValues:@{@"gameStart":@"NO"}];
         [currentRoomRef updateChildValues:@{@"turnNumber":@1000}];
         [currentRoomRef updateChildValues:@{@"portalNumber":@0}];
+        [currentRoomRef updateChildValues:@{@"portalDictionary":@{}}];
         [currentRoomRef updateChildValues:@{@"coordinateDictionary":@{@"011":@"empty"}}];
         
         //Add Values to the Player
